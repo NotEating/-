@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+	</head>
+	<body>
+		<input onblur="checkName()" type="text" id="uname" placeholder="用户名"><span id="uname_msg"></span><br>
+		<input type="text" id="upwd" placeholder="密码"><br>
+		<input onblur="checkUpwd()" type="text" id="cpwd" placeholder="密码验证"><span id="cpwd_msg"></span><br>
+		<input type="text" id="email" placeholder="邮箱"><br>
+		<input type="text" id="phone" placeholder="电话"><br>
+		<input type="text" id="user_name" placeholder="真实姓名"><br>
+		<input type="radio" name="gender" id="man">男
+		<input type="radio" name="gender" id="woman">女
+		<button onclick="login()">登录</button>
+		<script>
+			var isReg=true;
+			function checkUpwd(){
+				if(upwd.value==cpwd.value){
+					cpwd_msg.innerHTML="两次输入一致";
+					isReg=true;
+				}else{
+					cpwd_msg.innerHTML="两次输入不一致";
+					isReg=false;
+				}
+			}
+			function login(){
+				var $uname=uname.value;
+				var $upwd=upwd.value;
+				var $email=email.value;
+				var $phone=phone.value;
+				var $user_name=user_name.value;
+				var $gender="";
+				if(man.checked){
+					$gender="1";
+				}
+				if(woman.checked){
+					$gender="0";
+				}
+				//ajax post请求
+				var xhr=new XMLHttpRequest();
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4&&xhr.status==200){
+						var result=xhr.responseText;
+						if(result==1){
+							alert("注册成功");
+							location.href="http://127.0.0.1:8080/userlist.html";
+						}else{
+							alert(result);
+						}
+					}
+				}
+				xhr.open("post","/pro/api/v1/register",true);
+				var formdata=`uname=${$uname}&upwd=${$upwd}&email=${$email}&phone=${$phone}&user_name=${$user_name}&gender=${$gender}`;
+				xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			
+				checkUpwd();
+
+				if(isReg){
+					xhr.send(formdata);
+				}else{
+					alert("信息错误，不能注册");
+				}
+				
+			}
+			function checkName(){
+				//uname的非空验证
+				if(uname.value==""){
+					uname_msg.innerHTML="用户名不能为空";
+					return;
+				}
+				//ajax4部
+				var xhr=new XMLHttpRequest();
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4&&xhr.status==200){
+						var result=xhr.responseText;
+						if(result==1){
+							uname_msg.innerHTML="该用户已注册";
+							isReg=false;
+						}else{
+							uname_msg.innerHTML="可以注册";
+							isReg=true;
+						}
+					}
+				}
+				xhr.open("get","/pro/api/v1/checkuname/"+uname.value,true);
+				xhr.send();
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+	</head>
+	<body>
+		<div id="d1"></div>
+		<button onclick="show()">显示</button>
+		<script>
+			//写假数据
+			var users=[
+				{uid:"001",uname:"aaaa",score:38},
+				{uid:"002",uname:"bbbb",score:83},
+				{uid:"003",uname:"cccc",score:60},
+				{uid:"004",uname:"dddd",score:20},
+				{uid:"005",uname:"eeee",score:8}
+			];
+			function show(){
+				//html结构的字符串
+				var strHTML=`
+				<table border="1px">
+				  <tr>
+					  <th>编号</th>
+					  <th>姓名</th>
+					  <th>分数</th>
+					</tr>`;
+				for(var i=0;i<users.length;i++){
+					strHTML+=`
+						<tr>
+							<td>${users[i].uid}</td>
+							<td>${users[i].uname}</td>
+							<td>${users[i].score}</td>
+						</tr>
+					`;
+				}
+				strHTML+=`</table>`;
+				d1.innerHTML=strHTML;
+			}
+		</script>
+	</body>
+</html>

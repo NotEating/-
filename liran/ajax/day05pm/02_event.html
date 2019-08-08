@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+	</head>
+	<body>
+		<input onfocus="uname_check()" onblur="show()" type="text" id="uname">
+		<p id="msg"></p>
+		<script>
+			function uname_check(){
+				msg.innerHTML="用户名为6~10位";
+			}
+			function show(){
+				//获取文本框中输入的内容
+				var $uname=uname.value;
+				if($uname==""){
+					msg.innerHTML="用户名不能为空"
+				}else if($uname.length<6 || $uname.length >10){
+					msg.innerHTML="用户名长度不正确";
+				}else{
+					msg.innerHTML="正确";
+				}
+			}
+		</script>
+	</body>
+</html>

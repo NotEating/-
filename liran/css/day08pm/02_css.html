@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+		 <link rel="stylesheet" href="my.css">
+		<style>
+			div{color:red;}
+			h2{background-color:pink;color:blue;}
+			h2{font-size:24px;color:red;}
+			h4{background-color:pink !important;}	
+			h4{background-color:purple;}	
+		</style>
+		
+	</head>
+	<body>
+    <!-- 优先级  -->
+		<h4>今天你有点怪，怪好看的</h4>
+		<!-- 层叠性	 -->
+		<h2 style="color:orange">你今天有点不一样，有点可爱</h2>
+		<!-- 	继承性	 -->
+		<div>
+			这是div的文本
+			<a href="">这是div中的a的文本</a>
+			<p>这是div中p的文本
+				<span>这是div中的p中的span的文字</span>
+			</p>
+		</div>
+	</body>
+</html>

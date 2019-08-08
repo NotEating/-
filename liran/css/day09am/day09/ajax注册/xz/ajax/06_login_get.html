@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+	</head>
+	<body>
+		<input type="text" id="uname"><br>	
+		<input type="text" id="upwd"><br>	
+		<button onclick="login()">登录</button>
+		<script>
+			function login(){
+				//1.获取xhr异步对象
+				var  xhr=new XMLHttpRequest();
+				//4.绑定监听，获取响应
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4&&xhr.status==200){
+						var result=xhr.responseText;
+						alert(result);
+					}
+				}
+				//2.打开连接，创建请求
+				var $uname=uname.value;
+				var $upwd=upwd.value;
+				xhr.open("get",`/ajax/v1/login/${$uname}-${$upwd}`,true);
+				//3.发送请求
+				xhr.send();
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+	</head>
+	<body onload="getUsers()">
+		<div id="d1"></div>
+		<script>
+			function deluser($uid){
+				//1.创建异步对象
+				var  xhr=new XMLHttpRequest();
+				//4.绑定监听，获取响应数据
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4&&xhr.status==200){
+						var result=xhr.responseText;
+						if(result==1){
+							alert("删除成功");
+							getUsers();
+						}else{
+							alert("删除失败");
+						}
+					}
+				}
+				//2.打开连接，创建请求
+				xhr.open("delete","/pro/api/v1/deluser/"+$uid,true);
+				//3.发送请求
+				xhr.send();
+			}
+			function getUsers(){
+				//1.创建异步对象
+				var xhr=new XMLHttpRequest();
+				//4.绑定监听，获取响应
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4&&xhr.status==200){
+						var result=xhr.responseText;
+						//json解析
+						var arr=JSON.parse(result);
+						//dom操作,拼接表格
+						var strHTML=`
+							<table border="1px">
+								<tr>
+									<th>登录名称</th>
+									<th>用户邮箱</th>
+									<th>联系方式</th>
+									<th>真实姓名</th>
+									<th>用户性别</th>
+									<th>操作</th>
+								</tr>
+						`;
+						for(var i=0;i<arr.length;i++){
+							console.log(arr[i].uid);
+							//性别的处理
+							var $gender="";
+							if(arr[i].gender==1){
+								$gender="男";
+							}else if(arr[i].gender==0){
+								$gender="女";
+							}else{
+								$gender="不详";
+							}
+							strHTML+=`
+								<tr>
+									<td>${arr[i].uname}</td>
+									<td>${arr[i].email}</td>
+									<td>${arr[i].phone}</td>
+									<td>${arr[i].user_name}</td>
+									<td>${$gender}</td>
+									<td>
+										<a href="javascript:deluser(${arr[i].uid})">删除</a>
+										<a href="getuser.html?uid=${arr[i].uid}">修改</a>
+									</td>
+								</tr>
+							`;
+						}
+						strHTML+="	</table>";
+						d1.innerHTML=strHTML;
+					}
+				}
+				//2.打开连接，创建请求
+				xhr.open("get","/pro/api/v1/userlist",true);
+				//3.发送请求
+				xhr.send();
+			}
+		</script>
+	</body>
+</html>

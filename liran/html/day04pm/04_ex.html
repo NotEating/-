@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+	</head>
+	<body>
+		<div id="d1"></div><br>
+		<button onclick="showMsg()">显示数据</button>
+		<script>
+			var users=[
+				 {uid:001,uname:"亮亮",age:50},
+				 {uid:002,uname:"晶晶",age:20},
+				 {uid:003,uname:"方方",age:25},
+				 {uid:004,uname:"圆圆",age:29}
+				];
+			function showMsg(){
+				//1.获取div对象
+				var $div=document.getElementById("d1");
+				//2.把内容动态的显示在 div中
+				//2.1创建一个html结构的字符串
+
+
+				var strHTML=`
+					<table border="1px">
+						<tr>
+							<th>用户id</th>
+							<th>用户姓名</th>
+							<th>用户年龄</th>
+						</tr>
+				`;
+				for(var i=0;i<users.length;i++){
+					strHTML+=`
+						<tr>
+							<td>${users[i].uid}</td>
+							<td>${users[i].uname}</td>
+							<td>${users[i].age}</td>
+						</tr>
+					`;
+				}
+
+				strHTML+=`</table>`
+				$div.innerHTML=strHTML;
+
+//var strHTML=`<p>${users[0].uname}</p>`;
+//    strHTML+=`<a href="">${users[0].age}</a>`;
+//		strHTML+=`${users[1].uname}`
+//    strHTML+=``;
+//	
+//				$div.innerHTML=strHTML;
+
+
+
+
+
+//				for(var i=0;i<users.length;i++){
+//					console.log(users[i].uname);
+//				}
+			}
+		</script>
+	</body>
+</html>

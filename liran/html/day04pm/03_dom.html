@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+	</head>
+	<body>
+		<input id="d1" type="text"><br>
+		<input id="d2" type="text"><br>
+		<div id="d3">我是div</div>
+		<button onclick="getMsg()">登录</button>
+		<script>
+
+			function getMsg(){
+				var $uname=document.getElementById("d1");
+				var $upwd=document.getElementById("d2");
+				var $div=document.getElementById("d3");
+				$upwd.value=$uname.value;
+				console.log($div.innerHTML);
+				
+				$div.innerHTML=`<a href="">${$uname.value}</a>`;
+
+
+
+
+//				//1.获取input元素对象
+//				var $uname=document.getElementById("d1");
+//				//2.通过input对象，得到里面的值
+//				var uname_msg=$uname.value;
+//				//3.获取第二个input对象
+//				var $upwd=document.getElementById("d2");
+//				//4.把d1的值放入d2中显示
+//				$upwd.value=uname_msg;
+			
+			}
+		</script>
+	</body>
+</html>

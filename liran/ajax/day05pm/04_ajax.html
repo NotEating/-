@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+	</head>
+	<body>
+		<button onclick="getConn()">异步连接服务器</button>
+		<script>
+			function getConn(){
+				//1.创建异步对象
+				var xhr=new XMLHttpRequest();
+				//2.打开连接，创建请求
+				xhr.open("get","???",true);
+				//3.发送请求
+				xhr.send(null); 
+				//4.接收响应
+			}
+		</script>
+	</body>
+</html>

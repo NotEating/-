@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8"/>
+	</head>
+	<body>
+	   <button onclick="getXML()">登陆</button>
+		 <script>
+			function getXML(){
+				//1.创建xhr对象
+				var xhr=new XMLHttpRequest();
+				//4.绑定监听，获取响应16:10~16:25休息
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4&&xhr.status==200){
+						var result=xhr.responseXML;
+						//1.通过result获取最外层的标签
+						var stulist=result.getElementsByTagName("stulist")[0];
+						//2.通过第一层获取第二层
+						var student=stulist.getElementsByTagName("student")[1];
+						//3.通过第二层获取第三层
+						var name=student.getElementsByTagName("name")[0];
+						//4.获取文本
+						console.log(name.innerHTML);
+					}
+				}
+				//2.打开连接，创建请求
+				xhr.open("get","students.xml",true);
+				//3.发送请求
+				xhr.send();
+			}
+		 </script>
+	</body>
+</html>
